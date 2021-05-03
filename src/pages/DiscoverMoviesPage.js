@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import "./Discover.css";
 
@@ -7,6 +7,13 @@ export default function DiscoverMoviesPage() {
   const [searchText, set_searchText] = useState("");
   const [searchState, set_searchState] = useState([{ status: "idle" }]);
 
+  const history = useHistory();
+
+  const navigateToSearch = () => {
+    const routeParam = encodeURIComponent(searchText);
+    history.push(`/discover/${routeParam}`);
+    search(routeParam);
+  };
   const search = async () => {
     set_searchState({ status: "searching..." });
     console.log("TODO search movies for:", searchText);
@@ -26,7 +33,7 @@ export default function DiscoverMoviesPage() {
           value={searchText}
           onChange={(e) => set_searchText(e.target.value)}
         />
-        <button onClick={search}>Search</button>
+        <button onClick={navigateToSearch}>Search</button>
       </p>
 
       <div>
@@ -38,7 +45,7 @@ export default function DiscoverMoviesPage() {
         {searchState.status === "done"
           ? searchState.data.Search.map((element) => {
               return (
-                <Link to={`/discover/${element.imdbID}`}>
+                <Link to={`/movie/${element.imdbID}`}>
                   <div className="movie-box">
                     <h2>{element.Title}</h2>
                     <h3>{element.Year}</h3>
