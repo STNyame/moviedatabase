@@ -1,0 +1,27 @@
+.movie-detail-container {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+button {
+  margin: 10px;
+  background-color: lightcoral;
+  border: none;
+  border-radius: 10px;
+}
+.movie-detail-box,
+.title-box {
+  flex: 1;
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: column;
+  margin: 20px;
+  padding: 10px;
+}
+.title-box {
+  flex: 2;
+}
